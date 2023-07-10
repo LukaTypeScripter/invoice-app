@@ -11,7 +11,7 @@ import ilustration from './illustration-empty.svg'
 import avatar from './image-avatar.jpg'
 import logo from './logo.svg'
 import mainLogo from './download.png'
-
+import Pluss from './download (1).png'
 
 export {
     arrowDown,
@@ -26,5 +26,6 @@ export {
     ilustration,
     avatar,
     logo,
-    mainLogo
+    mainLogo,
+    Pluss
 }
