@@ -1,14 +1,15 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useState,useContext } from 'react'
+
 import styled from 'styled-components'
 import './App.css'
 import { SideNav,Invoices } from './components'
+import { DarkModeContext } from './contexts'
 
 function App() {
-
+ const {darkMode} = useContext(DarkModeContext)
 
   return (
-    <AppCont>
+    <AppCont darkMode={darkMode}>
 <SideNav />
 <Invoices />
     </AppCont>
@@ -16,8 +17,8 @@ function App() {
 }
 
 
-const AppCont = styled.div`
-  background-color: #f2f2f2;
+const AppCont = styled.div<{darkMode:boolean}>`
+  background-color: ${props => props.darkMode ? "#141625" : "#f2f2f2"};
   display: flex;
   gap: 36px;
   height: auto;
