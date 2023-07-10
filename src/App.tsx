@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import styled from 'styled-components'
 import './App.css'
-import { SideNav,Invoices } from './components'
+import { SideNav,Invoices, SpecificInvoices } from './components'
 import { DarkModeContext } from './contexts'
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       <SideNav />
       <Routes>
         <Route   path="/" element={<Invoices/>} />
+        <Route path="/invoices/:id" element={<SpecificInvoices/>} />
       </Routes>
     </AppCont>
   </Router>
