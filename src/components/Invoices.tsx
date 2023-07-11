@@ -2,9 +2,10 @@ import React, { useContext } from 'react'
 import { ArrowImg, DotGreen, FillterTitle, FillterWrap, Info, InvCont, InvFillterCont, InvTitle, InvTopCont, InvoiceLeft, InvoiceMoney, InvoiceRigth, InvoicesComp, Links, List, ListItem, NewBtn, PaidText, Plus, StatusCont, StatusWrap, Subtitle, Title } from './styles/invoices'
 import { Pluss, arrowDown } from '../images'
 import { ListContext } from '../contexts'
+import FilterModal from './FilterModal'
 
 function Invoices() {
-    const {data} = useContext(ListContext)
+    const {data,filtered} = useContext(ListContext)
   return (
     <InvoicesComp>
         <InvCont>
@@ -22,11 +23,12 @@ function Invoices() {
                         <Plus src={Pluss}></Plus>
                         New Invoice
                     </NewBtn>
+                    <FilterModal />
                 </InvFillterCont>
                
             </InvTopCont>
             <List>
-            {data.map((invoice) => (
+            {filtered.map((invoice) => (
         <ListItem key={invoice.id}>
           <Links to={`/invoices/${invoice.id}`}>
             <InvoiceLeft>
