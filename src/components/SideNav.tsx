@@ -1,6 +1,6 @@
-import React, { Fragment, useContext } from 'react'
+import  {  useContext } from 'react'
 import { Avatar, Seperetion, SideNavCont, SideNavLogo, Theme, ThemeWrap } from './styles/sideNav'
-import { avatar, ilustration, logo, mainLogo, moon, sun } from '../images'
+import { avatar,  mainLogo, moon, sun } from '../images'
 import { DarkModeContext } from '../contexts'
 
 function SideNav() {
