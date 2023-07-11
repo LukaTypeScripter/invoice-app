@@ -8,10 +8,20 @@ export const ListContextProvider = ({
   children: React.ReactNode;
 }) => {
   const [data,setData] = useState<Invoice[]>(invoiceData)
+  const [select,setSelect] = useState('all')
+  const [filteredData,setFilteredData] = useState([])
+  //be able to toggle
+  const filtered = select === "all" ? data : data.filter(data => data.status.toLowerCase() === select.toLowerCase())
+
   const value: ListContextValue = {
     data,
-    setData
+    setData,
+    setSelect,
+    filtered
+
   };
+
+
   useEffect(() => {
     const savedData = localStorage.getItem("invoiceData");
     if (savedData) {
