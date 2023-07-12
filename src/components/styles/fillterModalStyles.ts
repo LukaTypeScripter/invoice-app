@@ -1,8 +1,8 @@
 import styled from "styled-components";
+import { check } from "../../images";
 
-
-export const InvoicesFilter = styled.div`
-display: flex;
+export const InvoicesFilter = styled.div<{isOpenFillterModal:boolean}>`
+display: ${props => props.isOpenFillterModal ? 'flex' : 'none'};
     background: #ffffff;
     border-radius: 8px;
     bottom: -130px;
@@ -26,8 +26,9 @@ export const InvoicesFilterWrap = styled.div`
     width: 100%;
 `
 
-export const InvoicesFilterCheck = styled.div`
-    background-color: #dfe3fa;
+export const InvoicesFilterCheck = styled.div<{active: boolean; checked?: boolean}>`
+    background-color:${props => props.active ? "#7c5dfa" : '#dfe3fa'} ;
+    background-image: ${(props) => (props.checked ? `url(${check})` : "none")};
     background-position: 50%;
     background-repeat: no-repeat;
     background-size: 7px 7px;

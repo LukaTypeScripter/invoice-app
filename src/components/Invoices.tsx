@@ -1,23 +1,41 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import { ArrowImg, DotGreen, FillterTitle, FillterWrap, Info, InvCont, InvFillterCont, InvTitle, InvTopCont, InvoiceLeft, InvoiceMoney, InvoiceRigth, InvoicesComp, Links, List, ListItem, NewBtn, PaidText, Plus, StatusCont, StatusWrap, Subtitle, Title } from './styles/invoices'
 import { Pluss, arrowDown } from '../images'
 import { ListContext } from '../contexts'
 import FilterModal from './FilterModal'
+import NewInvoiceModal from './NewInvoiceModal'
 
 function Invoices() {
-    const {data,filtered} = useContext(ListContext)
+    const {data,filtered,setIsOpenFillter,isOpenFillter} = useContext(ListContext)
+
+    const modalRef = useRef<HTMLDivElement>(null);
+   
+
+    useEffect(() => {
+      const handleOutsideClick = (event:MouseEvent) => {
+        if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
+          setIsOpenFillter(false);
+        }
+      };
+  
+      document.addEventListener('mousedown', handleOutsideClick);
+  
+      return () => {
+        document.removeEventListener('mousedown', handleOutsideClick);
+      };
+    }, []);
   return (
     <InvoicesComp>
-        <InvCont>
+        <InvCont ref={modalRef}>
             <InvTopCont>
                 <InvTitle>
                     <Title>Invoices</Title>
                     <Subtitle>7 invoices</Subtitle>
                 </InvTitle>
                 <InvFillterCont>
-                    <FillterWrap>
+                    <FillterWrap >
                         <FillterTitle>Filter</FillterTitle>
-                            <ArrowImg src={arrowDown}/>
+                            <ArrowImg src={arrowDown} onClick={() => setIsOpenFillter(!isOpenFillter)}/>
                     </FillterWrap>
                     <NewBtn>
                         <Plus src={Pluss}></Plus>
@@ -53,8 +71,11 @@ function Invoices() {
       ))}
             </List>
         </InvCont>
+        <NewInvoiceModal />
     </InvoicesComp>
   )
 }
 
 export default Invoices
+
+

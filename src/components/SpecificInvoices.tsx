@@ -86,10 +86,10 @@ function SpecificInvoices() {
                   <InfoText>{info.description}</InfoText>
                 </InfoTitleWrap>
                 <InfoAdress>
-                  <InfoText>{info.clientAddress.street}</InfoText>
-                  <InfoText>{info.clientAddress.city}</InfoText>
-                  <InfoText>{info.clientAddress.postCode}</InfoText>
-                  <InfoText>{info.clientAddress.country}</InfoText>
+                  <InfoText>{info.clientAddress?.street}</InfoText>
+                  <InfoText>{info.clientAddress?.city}</InfoText>
+                  <InfoText>{info.clientAddress?.postCode}</InfoText>
+                  <InfoText>{info.clientAddress?.country}</InfoText>
                 </InfoAdress>
               </InfoTop>
 
@@ -109,10 +109,10 @@ function SpecificInvoices() {
                     <InfoText>Bill To</InfoText>
                     <InfoTitle>{info.clientName}</InfoTitle>
                     <InfoAdress>
-                      <InfoText>{info.clientAddress.street}</InfoText>
-                      <InfoText>{info.clientAddress.city}</InfoText>
-                      <InfoText>{info.clientAddress.country}</InfoText>
-                      <InfoText>{info.clientAddress.postCode}</InfoText>
+                      <InfoText>{info.clientAddress?.street}</InfoText>
+                      <InfoText>{info.clientAddress?.city}</InfoText>
+                      <InfoText>{info.clientAddress?.country}</InfoText>
+                      <InfoText>{info.clientAddress?.postCode}</InfoText>
                     </InfoAdress>
                   </InfoTitleWrap>
                 </InfoLeftCont>

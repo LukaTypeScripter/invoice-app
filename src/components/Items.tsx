@@ -6,14 +6,14 @@ import { ItemProps } from './interfaces'
 function ItemsComp({info}:ItemProps) {
   return (
     <>
-    <Items>
+    <Items key={info.id}>
     
     <ItemsTable>
-    <ItemsTableWrap>
+    <ItemsTableWrap >
     
 <ItemsTableTitle>Item Name</ItemsTableTitle>
 
-    {info.items.map(item =>(
+    {info.items?.map(item =>(
         <>
 <ItemsTableName key={item.name}>{item.name}</ItemsTableName>
         </>
@@ -21,7 +21,7 @@ function ItemsComp({info}:ItemProps) {
 </ItemsTableWrap>
 <ItemsTableWrap>
 <ItemsTableTitle>QTI</ItemsTableTitle>
-    {info.items.map(item =>(
+    {info.items?.map(item =>(
         <>
 <ItemsTableName key={item.quantity}>{item.quantity}</ItemsTableName>
         </>
@@ -29,24 +29,24 @@ function ItemsComp({info}:ItemProps) {
 </ItemsTableWrap>
 <ItemsTableWrap>
 <ItemsTableTitle>Item price</ItemsTableTitle>
-    {info.items.map(item =>(
+    {info.items?.map(item =>(
         <>
-<ItemsTableName key={item.name}>{item.price}</ItemsTableName>
+<ItemsTableName key={item.price}>{item.price}</ItemsTableName>
         </>
 ))}
 </ItemsTableWrap>
 <ItemsTableWrap>
 <ItemsTableTitle>Item total</ItemsTableTitle>
-    {info.items.map(item =>(
+    {info.items?.map(item =>(
         <>
-<ItemsTableName key={item.name}>{item.total}</ItemsTableName>
+<ItemsTableName key={item.total}>{item.total}</ItemsTableName>
         </>
 ))}
 </ItemsTableWrap>
 </ItemsTable>
 <TotalCOnt>
 <TotalLabel>Amount Due</TotalLabel>
-    <TotalLabel>$ {info.items.reduce((total, item) => total + item.total, 0).toFixed(2)}</TotalLabel>
+    <TotalLabel>$ {info.items?.reduce((total, item) => total + item.total, 0).toFixed(2)}</TotalLabel>
 </TotalCOnt>
 </Items>
     </>

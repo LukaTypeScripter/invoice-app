@@ -3,6 +3,10 @@ export interface ListContextValue {
     data: Invoice[]
     setSelect: React.Dispatch<React.SetStateAction<string>>
     filtered: Invoice[]
+    select: string
+    setIsOpenFillter: React.Dispatch<React.SetStateAction<boolean>>
+    isOpenFillter:boolean
+    handleAddInvoice: (newInvoice: Invoice) => void
 }
 
 
@@ -10,15 +14,14 @@ export const ListContextValue: ListContextValue = {
     setData:() => {},
     data:[],
     setSelect:() => {},
-    filtered:[]
+    filtered:[],
+    select:'',
+    setIsOpenFillter:() => {},
+    isOpenFillter:false,
+    handleAddInvoice:() => {}
 };
 
-interface Address {
-  street: string;
-  city: string;
-  postCode: string;
-  country: string;
-}
+
 
 export interface Item {
   name: string;
@@ -36,14 +39,18 @@ export interface Invoice {
   clientName: string;
   clientEmail: string;
   status: string;
-  senderAddress: Address;
-  clientAddress: Address;
+  senderAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  clientAddress?: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
   items: Item[];
   total: number;
-  paymentMethod: string;
-  paymentStatus: string;
-  currency: string;
-  totalLabel: string;
-  itemTotal: number;
-  reference: string;
 }

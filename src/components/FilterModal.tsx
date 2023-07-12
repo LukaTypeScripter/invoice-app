@@ -3,19 +3,40 @@ import { InvoicesFilter, InvoicesFilterCheck, InvoicesFilterName, InvoicesFilter
 import { ListContext } from '../contexts'
 
 function FilterModal() {
-    const {data,setSelect} = useContext(ListContext)
+    const {setSelect,select,isOpenFillter} = useContext(ListContext)
+
+      const toggleFilter = (filterType:any) => {
+        if (select === filterType) {
+          setSelect('all'); 
+        } else {
+          setSelect(filterType); 
+        }
+      };
+    
+      const isChecked = (filterType:any) => {
+        return select === filterType;
+      };
   return (
-    <InvoicesFilter>
+    <InvoicesFilter isOpenFillterModal={isOpenFillter}>
         <InvoicesFilterWrap>
-            <InvoicesFilterCheck onClick={() => setSelect('draft')}></InvoicesFilterCheck>
+            <InvoicesFilterCheck onClick={() => toggleFilter('draft')}
+              active={select === 'draft'}
+              checked={isChecked('draft')}
+            ></InvoicesFilterCheck>
             <InvoicesFilterName>Draft</InvoicesFilterName>
         </InvoicesFilterWrap>
         <InvoicesFilterWrap>
-            <InvoicesFilterCheck  onClick={() => setSelect('pending')}></InvoicesFilterCheck>
+            <InvoicesFilterCheck  onClick={() => toggleFilter('pending')}
+            active={select === 'pending'}
+            checked={isChecked('pending')}
+            ></InvoicesFilterCheck>
             <InvoicesFilterName>Pending</InvoicesFilterName>
         </InvoicesFilterWrap>
         <InvoicesFilterWrap>
-            <InvoicesFilterCheck  onClick={() => setSelect('paid')}></InvoicesFilterCheck>
+            <InvoicesFilterCheck  onClick={() => toggleFilter('paid')}
+            active={select === 'paid'}
+            checked={isChecked('paid')}
+            ></InvoicesFilterCheck>
             <InvoicesFilterName>Paid</InvoicesFilterName>
         </InvoicesFilterWrap>
     </InvoicesFilter>

@@ -9,16 +9,21 @@ export const ListContextProvider = ({
 }) => {
   const [data,setData] = useState<Invoice[]>(invoiceData)
   const [select,setSelect] = useState('all')
-  const [filteredData,setFilteredData] = useState([])
+  const [isOpenFillter,setIsOpenFillter] = useState(false)
   //be able to toggle
   const filtered = select === "all" ? data : data.filter(data => data.status.toLowerCase() === select.toLowerCase())
-
+  const handleAddInvoice = (newInvoice: Invoice) => {
+    setData((prevData) => [...prevData, newInvoice]);
+  };
   const value: ListContextValue = {
     data,
     setData,
     setSelect,
-    filtered
-
+    filtered,
+    select,
+    setIsOpenFillter,
+    isOpenFillter,
+    handleAddInvoice
   };
 
 
