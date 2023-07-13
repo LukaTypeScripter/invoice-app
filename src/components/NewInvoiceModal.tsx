@@ -2,15 +2,17 @@ import React, { Fragment, useContext, useState } from 'react'
 import { AdressInput,  Calendars,  CalendarIcon,  CurrentDate, PopUp, PopUpAdressCont, PopUpBillCOnt, PopUpBillLabel, PopUpBillLabelError, PopUpBillLabels, PopUpForm, PopUpInputWrap, PopUpLabelWrap, PopUpPaymentCont, PaymentItem, PaymentList, ArrowDown, PopUpItems, PopUpItemsTable, PopUpItemsTableWrap, PopUpTableInput, DelateInp, TotalWrap, AddButton, PopupBtnCont, BtnTypeWhite, PopUpSaveWrap, BtnTypeBlack, BtnTypePurple } from './styles/newInvoice'
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import { ListContext } from '../contexts';
+import { DarkModeContext, InvoicesModalContext, ListContext } from '../contexts';
 import { Invoice, Item } from '../contexts/interfaces/List';
-import Buttons from './Reusable/Button';
 
 function NewInvoiceModal() {
-    const {data,setData,handleAddInvoice} = useContext(ListContext)
+    const {data,handleAddInvoice} = useContext(ListContext)
+    const {setIsOpenNewInvoice} = useContext(InvoicesModalContext)
+    const {darkMode} = useContext(DarkModeContext)
     const [value, onChange] = useState(new Date());
     const [isOpenCalendar,setIsOpenCalendar] = useState(false)
     const [paymentList,setPaymentList] = useState(false)
+
   const handleCalendarChange = (date:any) => {
     onChange(date);
     setIsOpenCalendar(false)
@@ -54,67 +56,125 @@ function NewInvoiceModal() {
     updatedItems.splice(index, 1);
     setItems(updatedItems);
   };
-  const handleSaveInvoice = (e:any) => {
-e.preventDefault();
-    // Create a new invoice object
+  const [formData, setFormData] = useState({
+    streetAddress: '',
+    city: '',
+    postCode: '',
+    country: '',
+    clientName: '',
+    clientEmail: '',
+    clientAddress: '',
+    clientCity: '',
+    clientPostCode: '',
+    clientCountry: '',
+    description: '',
+    paymentTerms: 0
+  });
+
+ 
+  const handleInputChanges = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    name: keyof typeof formData
+  ) => {
+    const { value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value
+    }));
+  };
+  // ...
+
+  const handleSaveInvoice = (e: React.FormEvent,statusType:string) => {
+    e.preventDefault();
+
     const newInvoice: Invoice = {
       id: Date.now().toString(),
-      createdAt: new Date().toISOString(),
-      paymentDue: value.toISOString(),
-      description: '', // Update with the actual description value
-      paymentTerms: 0, // Update with the actual payment terms value
-      clientName: '', // Update with the actual client name value
-      clientEmail: '', // Update with the actual client email value
-      status: 'draft', // or any other default status
+      createdAt: new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      }),
+      paymentDue: value.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric'
+      }),
+      description: formData.description,
+      paymentTerms: formData.paymentTerms,
+      clientName: formData.clientName,
+      clientEmail: formData.clientEmail,
+      status: statusType,
       senderAddress: {
-        street: '', // Update with the actual sender street value
-        city: '', // Update with the actual sender city value
-        postCode: '', // Update with the actual sender post code value
-        country: '' // Update with the actual sender country value
+        street: formData.streetAddress,
+        city: formData.city,
+        postCode: formData.postCode,
+        country: formData.country
       },
       clientAddress: {
-        street: '', // Update with the actual client street value
-        city: '', // Update with the actual client city value
-        postCode: '', // Update with the actual client post code value
-        country: '' 
+        street: formData.clientAddress,
+        city: formData.clientCity,
+        postCode: formData.clientPostCode,
+        country: formData.clientCountry
       },
       items: items,
-      total: 0 // Update with the actual total value
+      total: 0 
     };
 
-    // Call the addInvoice function from ListContext to add the new invoice to the data array
     handleAddInvoice(newInvoice);
+    setFormData({
+      streetAddress: '',
+      city: '',
+      postCode: '',
+      country: '',
+      clientName: '',
+      clientEmail: '',
+      clientAddress: '',
+      clientCity: '',
+      clientPostCode: '',
+      clientCountry: '',
+      description: '',
+      paymentTerms: 0
+    });
 
-    // Clear the form or navigate to a different page
-    // Reset the state variables as needed
     setItems([{ name: '', quantity: 0, price: 0, total: 0 }]);
-    console.log(data)
+    setIsOpenNewInvoice(false)
   };
+
   console.log(data)
-  return (
+  return ( 
     <PopUp>
-        <PopUpForm>
+        <PopUpForm darkMode={darkMode}>
             <PopUpBillCOnt>
                 <PopUpBillLabel>Bill Form</PopUpBillLabel>
                 <PopUpInputWrap>
                     <PopUpLabelWrap>
-                        <PopUpBillLabels>Street Adress</PopUpBillLabels>
+                        <PopUpBillLabels
+                       
+                        >Street Adress</PopUpBillLabels>
                         <PopUpBillLabelError></PopUpBillLabelError>
                     </PopUpLabelWrap>
-                    <AdressInput />
+                    <AdressInput     name="streetAddress"
+                           value={formData.streetAddress}
+                           onChange={(e) => handleInputChanges(e, "streetAddress")} darkmode={darkMode}/>
                 </PopUpInputWrap>
                 <PopUpAdressCont>
                 <PopUpInputWrap>
                     <PopUpBillLabels>City</PopUpBillLabels>
-                    <AdressInput />
+                    <AdressInput     name="clientCity"
+                           value={formData.clientCity}
+                           onChange={(e) => handleInputChanges(e, "clientCity")} darkmode={darkMode}/>
                     </PopUpInputWrap>
                     <PopUpInputWrap>
                     <PopUpBillLabels>Post Code</PopUpBillLabels>
-                    <AdressInput />
+                    <AdressInput  name="postCode"
+                           value={formData.clientPostCode}
+                           onChange={(e) => handleInputChanges(e, "clientPostCode")} darkmode={darkMode}/>
                     </PopUpInputWrap>
                     <PopUpInputWrap>
                     <PopUpBillLabels>Country</PopUpBillLabels>
-                    <AdressInput />
+                    <AdressInput  name="clientCountry"
+                           value={formData.clientCountry}
+                           onChange={(e) => handleInputChanges(e, "clientCountry")} darkmode={darkMode}/>
                     </PopUpInputWrap>
                 </PopUpAdressCont>
                 
@@ -126,34 +186,47 @@ e.preventDefault();
                         <PopUpBillLabels>Client's Name</PopUpBillLabels>
                         <PopUpBillLabelError></PopUpBillLabelError>
                     </PopUpLabelWrap>
-                    <AdressInput />
+                    <AdressInput name="clientName"
+                           value={formData.clientName}
+                           onChange={(e) => handleInputChanges(e, "clientName")} darkmode={darkMode}/>
+                           
                 </PopUpInputWrap>
                 <PopUpInputWrap>
                     <PopUpLabelWrap>
                         <PopUpBillLabels>Client's Email</PopUpBillLabels>
                         <PopUpBillLabelError></PopUpBillLabelError>
                     </PopUpLabelWrap>
-                    <AdressInput />
+                    <AdressInput name="clientName"
+                           value={formData.clientEmail}
+                           onChange={(e) => handleInputChanges(e, "clientEmail")} darkmode={darkMode}/>
                 </PopUpInputWrap>
                 <PopUpInputWrap>
                     <PopUpLabelWrap>
                         <PopUpBillLabels>Client's Adress</PopUpBillLabels>
                         <PopUpBillLabelError></PopUpBillLabelError>
                     </PopUpLabelWrap>
-                    <AdressInput />
+                    <AdressInput name="clientAddress"
+                           value={formData.clientAddress}
+                           onChange={(e) => handleInputChanges(e, "clientAddress")} darkmode={darkMode}/>
                 </PopUpInputWrap>
                 <PopUpAdressCont>
                 <PopUpInputWrap>
                     <PopUpBillLabels>City</PopUpBillLabels>
-                    <AdressInput />
+                    <AdressInput name="city"
+                           value={formData.city}
+                           onChange={(e) => handleInputChanges(e, "city")} darkmode={darkMode}/>
                     </PopUpInputWrap>
                     <PopUpInputWrap>
                     <PopUpBillLabels>Post Code</PopUpBillLabels>
-                    <AdressInput />
+                    <AdressInput name="postCode"
+                           value={formData.postCode}
+                           onChange={(e) => handleInputChanges(e, "postCode")} darkmode={darkMode}/>
                     </PopUpInputWrap>
                     <PopUpInputWrap>
                     <PopUpBillLabels>Country</PopUpBillLabels>
-                    <AdressInput />
+                    <AdressInput name="country"
+                           value={formData.country}
+                           onChange={(e) => handleInputChanges(e, "country")} darkmode={darkMode}/>
                     </PopUpInputWrap>
                 </PopUpAdressCont>
             </PopUpBillCOnt>
@@ -161,8 +234,8 @@ e.preventDefault();
             <PopUpInputWrap>
                     
                         <PopUpBillLabels >Calendar</PopUpBillLabels>
-                        <Calendars onClick={() => setIsOpenCalendar(!isOpenCalendar)}>
-                            <CurrentDate>{value.toLocaleDateString()} </CurrentDate>
+                        <Calendars onClick={() => setIsOpenCalendar(!isOpenCalendar)} darkmode={darkMode}>
+                            <CurrentDate darkmode={darkMode}>{value.toLocaleDateString()} </CurrentDate>
                             <CalendarIcon></CalendarIcon>
                         </Calendars>
                 </PopUpInputWrap>
@@ -175,14 +248,14 @@ e.preventDefault();
                 )}
             <PopUpInputWrap onClick={() => setPaymentList(!paymentList)}>
             <PopUpBillLabels >Payment Terms</PopUpBillLabels>
-                <Calendars>
-                    <CurrentDate>1</CurrentDate>
+                <Calendars darkmode={darkMode}>
+                    <CurrentDate darkmode={darkMode}>1</CurrentDate>
                     <ArrowDown />
                 </Calendars>
             </PopUpInputWrap>
             {paymentList && (
  <PaymentList>
- <PaymentItem>Net 1 Day</PaymentItem>
+ <PaymentItem >Net 1 Day</PaymentItem>
  <PaymentItem>Net 7 Day</PaymentItem>
  <PaymentItem>Net 14 Day</PaymentItem>
  <PaymentItem>Net 30 Day</PaymentItem>
@@ -194,7 +267,9 @@ e.preventDefault();
                         <PopUpBillLabels>Project Description</PopUpBillLabels>
                         <PopUpBillLabelError></PopUpBillLabelError>
                     </PopUpLabelWrap>
-                    <AdressInput />
+                    <AdressInput name="description"
+                           value={formData.description}
+                           onChange={(e) => handleInputChanges(e, "description")} darkmode={darkMode}/>
                 </PopUpInputWrap>
 
                 <PopUpItems>
@@ -211,6 +286,7 @@ e.preventDefault();
                   name="name"
                   value={item.name}
                   onChange={(e) => handleInputChange(index, "name",e.target.value)}
+                  darkmode={darkMode}
                 />
                
               
@@ -228,6 +304,7 @@ e.preventDefault();
                   value={item.quantity.toString()}
                   onChange={(e) => handleInputChange(index, "quantity",e.target.value)}
                   key={index}
+                  darkmode={darkMode}
                 />
                
               
@@ -243,6 +320,7 @@ e.preventDefault();
                   value={item.price.toString()}
                   onChange={(e) => handleInputChange(index, "price",e.target.value)}
                   key={index}
+                  darkmode={darkMode}
                 />
                
               
@@ -257,6 +335,7 @@ e.preventDefault();
                   name="total"
                   value={item.total.toString()}
                   onChange={(e) => handleInputChange(index, "total",e.target.value)}
+                  darkmode={darkMode}
                  
                 />
                <DelateInp onClick={() => handleRemoveItem(index)} />
@@ -268,12 +347,12 @@ e.preventDefault();
                     <AddButton onClick={handleAddItem}>+ Add New Item</AddButton>
                 </PopUpItems>
                 <PopupBtnCont>
-                    <BtnTypeWhite>Discard</BtnTypeWhite>
+                    <BtnTypeWhite onClick={() => setIsOpenNewInvoice(false)}>Discard</BtnTypeWhite>
                     <PopUpSaveWrap>
-                        <BtnTypeBlack>
+                        <BtnTypeBlack onClick={(e) => handleSaveInvoice(e,"draft")}>
                             Save As Draft
                         </BtnTypeBlack>
-                        <BtnTypePurple onClick={handleSaveInvoice}>Save & Send</BtnTypePurple>
+                        <BtnTypePurple onClick={(e) => handleSaveInvoice(e,"pending")}>Save & Send</BtnTypePurple>
                     </PopUpSaveWrap>
                 </PopupBtnCont>
             </PopUpPaymentCont>
