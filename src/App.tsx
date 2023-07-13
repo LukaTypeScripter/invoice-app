@@ -8,9 +8,7 @@ import { DarkModeContext } from './contexts'
 
 function App() {
  const {darkMode} = useContext(DarkModeContext)
-//Todo:be able to go specific invoices with id invoice/:id
-//make add new invoice modal
-//filter modal and filter functionality
+
   return (
     <Router>
     <AppCont darkMode={darkMode}>
@@ -35,6 +33,7 @@ const AppCont = styled.div<{darkMode:boolean}>`
   min-height: 100vh;
   position: relative;
   width: 100%;
+  overflow: hidden;
   @media screen and (max-width: 1024px) {
     flex-direction: column;
     gap:0;

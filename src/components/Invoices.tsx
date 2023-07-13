@@ -1,13 +1,14 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import  { useContext, useEffect, useRef } from 'react'
 import { ArrowImg, DotGreen, FillterTitle, FillterWrap, Info, InvCont, InvFillterCont, InvTitle, InvTopCont, InvoiceLeft, InvoiceMoney, InvoiceRigth, InvoicesComp, Links, List, ListItem, NewBtn, PaidText, Plus, StatusCont, StatusWrap, Subtitle, Title } from './styles/invoices'
 import { Pluss, arrowDown } from '../images'
-import { ListContext } from '../contexts'
+import { DarkModeContext, InvoicesModalContext, ListContext } from '../contexts'
 import FilterModal from './FilterModal'
 import NewInvoiceModal from './NewInvoiceModal'
 
 function Invoices() {
-    const {data,filtered,setIsOpenFillter,isOpenFillter} = useContext(ListContext)
-
+    const {filtered,setIsOpenFillter,isOpenFillter} = useContext(ListContext)
+    const {setIsOpenNewInvoice,isOpenNewInvoice} = useContext(InvoicesModalContext)
+    const {darkMode} = useContext(DarkModeContext)
     const modalRef = useRef<HTMLDivElement>(null);
    
 
@@ -29,15 +30,15 @@ function Invoices() {
         <InvCont ref={modalRef}>
             <InvTopCont>
                 <InvTitle>
-                    <Title>Invoices</Title>
-                    <Subtitle>7 invoices</Subtitle>
+                    <Title darkMode={darkMode}>Invoices</Title>
+                    <Subtitle>{filtered.length} invoices</Subtitle>
                 </InvTitle>
                 <InvFillterCont>
                     <FillterWrap >
-                        <FillterTitle>Filter</FillterTitle>
+                        <FillterTitle darkMode={darkMode}>Filter</FillterTitle>
                             <ArrowImg src={arrowDown} onClick={() => setIsOpenFillter(!isOpenFillter)}/>
                     </FillterWrap>
-                    <NewBtn>
+                    <NewBtn onClick={() => setIsOpenNewInvoice(!isOpenNewInvoice)}>
                         <Plus src={Pluss}></Plus>
                         New Invoice
                     </NewBtn>
@@ -48,11 +49,11 @@ function Invoices() {
             <List>
             {filtered.map((invoice) => (
         <ListItem key={invoice.id}>
-          <Links to={`/invoices/${invoice.id}`}>
+          <Links to={`/invoices/${invoice.id}`} darkMode={darkMode}>
             <InvoiceLeft>
-              <Info>{invoice.clientName}</Info>
-              <Info>{invoice.createdAt}</Info>
-              <Info>{invoice.description}</Info>
+              <Info darkMode={darkMode}>{invoice.clientName}</Info>
+              <Info darkMode={darkMode}>{invoice.createdAt}</Info>
+              <Info darkMode={darkMode}>{invoice.description}</Info>
             </InvoiceLeft>
             <InvoiceRigth>
               <InvoiceMoney>{invoice.total}</InvoiceMoney>
@@ -71,7 +72,10 @@ function Invoices() {
       ))}
             </List>
         </InvCont>
-        <NewInvoiceModal />
+              {isOpenNewInvoice && (
+                <NewInvoiceModal />
+              )}
+        
     </InvoicesComp>
   )
 }

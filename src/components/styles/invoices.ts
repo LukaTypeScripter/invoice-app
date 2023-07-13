@@ -27,7 +27,7 @@ export const InvCont = styled(SameStyles)`
   max-width: 730px;
   @media screen and (max-width: 768px){
     gap: 32px;
-    max-width: 327px;
+    max-width: 500px;
   }
 `;
 
@@ -46,12 +46,13 @@ export const InvTitle = styled.div`
   justify-content: center;
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h1<{darkMode:boolean}>`
   color: #0c0e16;
   font-size: 32px;
   font-weight: 700;
   letter-spacing: -1;
   line-height: 36px;
+  color: ${props => props.darkMode ? "white" : "#0c0e16"};
   @media screen and (max-width: 768px){
     font-size: 20px;
     line-height: 22px;
@@ -77,8 +78,8 @@ export const FillterWrap = styled.div`
   display: flex;
   align-items: center;
 `;
-export const FillterTitle = styled.p`
-  color: #0c0e16;
+export const FillterTitle = styled.p<{darkMode:boolean}>`
+  color: ${props => props.darkMode ? "white" : "#0c0e16"};
   font-size: 14px;
   font-weight: 700;
   letter-spacing: -0.25px;
@@ -122,9 +123,9 @@ max-width: 730px;
 padding: 0;
 width: 100%;
 `
-export const Links = styled(Link)`
+export const Links = styled(Link)<{darkMode:boolean}>`
 align-items: center;
-    background: #1E2139;
+    background: ${props => props.darkMode ? "#1E2139" : "white"};
     border-radius: 8px;
     box-shadow: 0 10px 10px -10px rgba(72,84,159,.1);
     box-sizing: border-box;
@@ -135,6 +136,7 @@ align-items: center;
 `
 export const ListItem = styled.li`
 width: 100%;
+
 `
 export const InvoiceLeft = styled.div`
 display: flex;
@@ -153,8 +155,8 @@ align-items:center;
 gap: 40px;
 justify-content:center;
 `
-export const Info = styled.p`
-    color: white;
+export const Info = styled.p<{darkMode:boolean}>`
+    color: ${props => props.darkMode ? "#FFFFFF" : "#888eb0" };
 
     font-size: 12px;
     font-style: normal;

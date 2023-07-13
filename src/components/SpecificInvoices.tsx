@@ -21,13 +21,14 @@ import {
 } from "./styles/specific";
 import { useNavigate, useParams } from "react-router-dom";
 import { arrowLeft } from "../images";
-import { ListContext } from "../contexts";
+import { DarkModeContext, ListContext } from "../contexts";
 import { DotGreen, PaidText, StatusCont, StatusWrap } from "./styles/invoices";
 import Buttons from "./Reusable/Button";
 import ItemsComp from "./Items";
 function SpecificInvoices() {
   const navigate = useNavigate();
   const { data } = useContext(ListContext);
+  const { darkMode } = useContext(DarkModeContext);
   const { id } = useParams();
   const specificInvoices = data.filter((invoice) => invoice.id === id);
   console.log(specificInvoices);
@@ -39,12 +40,12 @@ function SpecificInvoices() {
       <ReciptCont>
         <BackCont onClick={() => navigate("/")}>
           <BackIcon src={arrowLeft} />
-          <GoBackTExt>Go Back</GoBackTExt>
+          <GoBackTExt darkMode={darkMode}>Go Back</GoBackTExt>
         </BackCont>
-        <StatusBar>
+        <StatusBar darkMode={darkMode}>
           {specificInvoices.map((invoice) => (
             <Fragment key={invoice.id}>
-              <StatusCont>
+              <StatusCont >
                 <StatusBarLabel>Status</StatusBarLabel>
                 <StatusWrap status={invoice.status}>
                   <DotGreen status={invoice.status} />
@@ -77,19 +78,19 @@ function SpecificInvoices() {
             </Fragment>
           ))}
         </StatusBar>
-        <InfoCont>
+        <InfoCont darkMode={darkMode}>
           {specificInvoices.map((info) => (
             <Fragment key={info.id}>
               <InfoTop>
                 <InfoTitleWrap>
-                  <InfoTitle>{info.id}</InfoTitle>
-                  <InfoText>{info.description}</InfoText>
+                  <InfoTitle darkMode={darkMode}>{info.id}</InfoTitle>
+                  <InfoText darkMode={darkMode}>{info.description}</InfoText>
                 </InfoTitleWrap>
                 <InfoAdress>
-                  <InfoText>{info.clientAddress?.street}</InfoText>
-                  <InfoText>{info.clientAddress?.city}</InfoText>
-                  <InfoText>{info.clientAddress?.postCode}</InfoText>
-                  <InfoText>{info.clientAddress?.country}</InfoText>
+                  <InfoText darkMode={darkMode}>{info.clientAddress?.street}</InfoText>
+                  <InfoText darkMode={darkMode}>{info.clientAddress?.city}</InfoText>
+                  <InfoText darkMode={darkMode}>{info.clientAddress?.postCode}</InfoText>
+                  <InfoText darkMode={darkMode}>{info.clientAddress?.country}</InfoText>
                 </InfoAdress>
               </InfoTop>
 
@@ -97,28 +98,28 @@ function SpecificInvoices() {
                 <InfoLeftCont>
                   <InfoPayvment>
                     <InfoTitleWrap>
-                      <InfoText>Invoice Date</InfoText>
-                      <InfoTitle>{info.createdAt}</InfoTitle>
+                      <InfoText darkMode={darkMode}>Invoice Date</InfoText>
+                      <InfoTitle darkMode={darkMode}>{info.createdAt}</InfoTitle>
                     </InfoTitleWrap>
                     <InfoTitleWrap>
-                      <InfoText>Paymant Due</InfoText>
-                      <InfoTitle>{info.paymentDue}</InfoTitle>
+                      <InfoText darkMode={darkMode}>Paymant Due</InfoText>
+                      <InfoTitle darkMode={darkMode}>{info.paymentDue}</InfoTitle>
                     </InfoTitleWrap>
                   </InfoPayvment>
                   <InfoTitleWrap>
-                    <InfoText>Bill To</InfoText>
-                    <InfoTitle>{info.clientName}</InfoTitle>
+                    <InfoText darkMode={darkMode}>Bill To</InfoText>
+                    <InfoTitle darkMode={darkMode}>{info.clientName}</InfoTitle>
                     <InfoAdress>
-                      <InfoText>{info.clientAddress?.street}</InfoText>
-                      <InfoText>{info.clientAddress?.city}</InfoText>
-                      <InfoText>{info.clientAddress?.country}</InfoText>
-                      <InfoText>{info.clientAddress?.postCode}</InfoText>
+                      <InfoText darkMode={darkMode}>{info.clientAddress?.street}</InfoText>
+                      <InfoText darkMode={darkMode}>{info.clientAddress?.city}</InfoText>
+                      <InfoText darkMode={darkMode}>{info.clientAddress?.country}</InfoText>
+                      <InfoText darkMode={darkMode}>{info.clientAddress?.postCode}</InfoText>
                     </InfoAdress>
                   </InfoTitleWrap>
                 </InfoLeftCont>
                 <InfoTitleWrap>
-                  <InfoText>Sent to</InfoText>
-                  <InfoTitle>{info.clientEmail}</InfoTitle>
+                  <InfoText darkMode={darkMode}>Sent to</InfoText>
+                  <InfoTitle darkMode={darkMode}>{info.clientEmail}</InfoTitle>
                 </InfoTitleWrap>
               </InfoBottom>
 

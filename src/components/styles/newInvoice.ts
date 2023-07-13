@@ -25,9 +25,9 @@ width: 100%;
 }
 `
 
-export const PopUpForm = styled.form`
+export const PopUpForm = styled.form<{darkMode:boolean}>`
 align-items: flex-start;
-background: white;
+background: ${props => props.darkMode ? "#1E2139" : "white"};
 border-radius: 0 20px 20px 0;
 display: flex;
 flex-direction: column;
@@ -90,12 +90,12 @@ export const PopUpBillLabelError = styled.label`
     display: none;
 `
 
-export const AdressInput = styled.input`
-background: transparent;
-    border:  1px solid #dfe3fa;
+export const AdressInput = styled.input<{darkmode:boolean}>`
+background: ${props => props.darkmode ? "#252945" : "transparent"};
+    border: ${darkmode => darkmode ? "0" : "1px solid #dfe3fa"} ;
     border-radius: 4px;
     box-sizing: border-box;
-    color: #0c0e16;
+    color:  ${darkmode => darkmode ? "white" : "#0c0e16"};
     font-family: Spartan;
     font-size: 12px;
     font-style: normal;
@@ -106,6 +106,7 @@ background: transparent;
     outline: 0;
     padding: 17px;
     width: 100%;
+
 `
 export const PopUpAdressCont = styled.div`
     align-items: flex-start;
@@ -122,7 +123,7 @@ align-items: flex-start;
 gap:24px;
 justify-content: center;
 `
-export const Calendars = styled.div`
+export const Calendars = styled.div<{darkmode:boolean}>`
     align-items: center;
     background: transparent;
     border: 1px solid #dfe3fa;
@@ -132,9 +133,11 @@ export const Calendars = styled.div`
     justify-content: space-between;
     padding: 16px;
     width: 100%;
-
+background: ${props => props.darkmode ? "#252945" : "transparent"};
+    border: ${darkmode => darkmode ? "0" : "1px solid #dfe3fa"} ;
+        
 `
-export const CurrentDate = styled.p`
+export const CurrentDate = styled.p<{darkmode:boolean}>`
 color: #0c0e16;
     font-family: Spartan;
     font-size: 12px;
@@ -143,7 +146,7 @@ color: #0c0e16;
     letter-spacing: -.25px;
     line-height: 15px;
     margin: 0;
-
+    color:  ${darkmode => darkmode ? "white" : "#0c0e16"};
 `
 export const CalendarIcon = styled.i`
     background-image: url(${calendar});
@@ -234,7 +237,7 @@ align-items: flex-start;
 
 `
 
-export const PopUpTableInput = styled.input`
+export const PopUpTableInput = styled.input<{darkmode:boolean}>`
 box-sizing: border-box;
     font-size: 12px;
     font-style: normal;
@@ -243,12 +246,14 @@ box-sizing: border-box;
     line-height: 15px;
     padding: 17px;
     width: 100%;
-    background: transparent;
-    border: 1px solid #dfe3fa;
+ 
+  
     border-radius: 4px;
     color:#0c0e16;
     outline: 0;
-
+    background: ${props => props.darkmode ? "#252945" : "transparent"};
+    border: ${darkmode => darkmode ? "0" : "1px solid #dfe3fa"} ;
+    color:  ${darkmode => darkmode ? "white" : "#0c0e16"};
 `
 
 export const DelateInp = styled.i`

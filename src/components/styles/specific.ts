@@ -27,8 +27,8 @@ export const BackIcon = styled.img`
   width: 7px;
 `;
 
-export const GoBackTExt = styled.p`
-  color: #0c0e16;
+export const GoBackTExt = styled.p<{darkMode:boolean}>`
+  color: ${props => props.darkMode ? "white" : "#0c0e16"};
   font-size: 14px;
   font-style: normal;
   font-weight: 700;
@@ -36,9 +36,9 @@ export const GoBackTExt = styled.p`
   line-height: 15px;
   margin: 0;
 `;
-export const StatusBar = styled.div`
+export const StatusBar = styled.div<{darkMode:boolean}>`
   align-items: center;
-  background: #ffffff;
+  background: ${props => props.darkMode ? "#1E2139":"white"};
   border-radius: 8px;
   box-shadow: 0 10px 10px -10px rgba(72, 84, 159, 0.1);
   box-sizing: border-box;
@@ -68,8 +68,8 @@ export const DefaultInfo = styled.div`
   display: flex;
   width: 100%;
 `;
-export const InfoCont = styled(DefaultInfo)`
-  background-color: white;
+export const InfoCont = styled(DefaultInfo)<{darkMode:boolean}>`
+  background-color: ${props => props.darkMode ? "#1E2139" : " white"};
   border-radius: 8px;
   box-shadow: 0 10px 10px -10px rgba(72, 84, 159, 0.1);
   box-sizing: border-box;
@@ -109,16 +109,16 @@ export const InfoTitleWrap = styled.div`
   justify-content: center;
   gap: 12px;
 `;
-export const InfoText = styled.div`
-  color: #888eb0;
+export const InfoText = styled.div<{darkMode:boolean}>`
+  color: ${props => props.darkMode ? "#DFE3FA" : "#888eb0"};
   font-size: 12px;
   font-weight: 500;
   letter-spacing: -0.25px;
   line-height: 15px;
   max-width: 120px;
 `;
-export const InfoTitle = styled.p`
-  color: #0c0e16;
+export const InfoTitle = styled.p<{darkMode:boolean}>`
+  color: ${props => props.darkMode ? "white" : "#0c0e16"};
   font-size: 15px;
   font-weight: 700;
   letter-spacing: -0.3125px;
@@ -132,11 +132,11 @@ export const InfoAdress = styled.div`
   gap: 6px;
 `;
 
-export const Items = styled.div`
+export const Items = styled.div<{darkMode:boolean}>`
   align-items: center;
   display: flex;
   width: 100%;
-  background: #f9fafe;
+  background: ${props => props.darkMode ? "#252945" : "#f9fafe"};
  border-radius: 8px 8px 0 0;
     box-sizing: border-box;
     flex-direction: column;
@@ -175,19 +175,19 @@ export const ItemsTableTitle = styled.p`
   letter-spacing: -0.229167px;
   line-height: 18px;
 `;
-export const ItemsTableName = styled.p`
-  color: #0c0e16;
+export const ItemsTableName = styled.p<{darkMode:boolean}>`
+  color:  ${props => props.darkMode ? "white" : "#0c0e16"};
   font-size: 12px;
   font-weight: 700;
   letter-spacing: -0.25px;
   line-height: 15px;
 `;
 
-export const TotalCOnt = styled.div`
+export const TotalCOnt = styled.div<{darkMode:boolean}>`
   align-items: center;
-  background: #373b53;
+  background: ${props => props.darkMode ? "#0C0E16" : "#373b53"};
   border-radius: 0 0 8px 8px;
-  bottom: -80px;
+  bottom: -60px;
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
@@ -202,7 +202,7 @@ export const TotalLabel = styled.div`
   color: #fff;
   font-style: normal;
   margin: 0;
-  font-size: 11px;
+  font-size: 25px;
   font-weight: 500;
   letter-spacing: -0.229167px;
   line-height: 18px;

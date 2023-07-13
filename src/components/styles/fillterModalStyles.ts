@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { check } from "../../images";
 
-export const InvoicesFilter = styled.div<{isOpenFillterModal:boolean}>`
+export const InvoicesFilter = styled.div<{isOpenFillterModal:boolean,darkMode:boolean}>`
 display: ${props => props.isOpenFillterModal ? 'flex' : 'none'};
-    background: #ffffff;
+    background: ${props => props.darkMode ? "#1E2139" : "#ffffff"};
     border-radius: 8px;
     bottom: -130px;
     box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
@@ -37,11 +37,11 @@ export const InvoicesFilterCheck = styled.div<{active: boolean; checked?: boolea
     width: 16px;
 `
 
-export const InvoicesFilterName = styled.div`
+export const InvoicesFilterName = styled.div<{darkMode:boolean}>`
     font-size: 12px;
     font-style: normal;
     font-weight: 700;
     letter-spacing: -.25px;
     line-height: 15px;
-    color: #0c0e16;
+    color: ${props => props.darkMode ? "white" : "#0c0e16 "};
 `
