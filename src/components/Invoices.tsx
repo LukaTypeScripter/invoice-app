@@ -4,6 +4,7 @@ import { Pluss, arrowDown } from '../images'
 import { DarkModeContext, InvoicesModalContext, ListContext } from '../contexts'
 import FilterModal from './FilterModal'
 import NewInvoiceModal from './NewInvoiceModal'
+import Delate from './Delate'
 
 function Invoices() {
     const {filtered,setIsOpenFillter,isOpenFillter} = useContext(ListContext)
@@ -75,7 +76,7 @@ function Invoices() {
               {isOpenNewInvoice && (
                 <NewInvoiceModal />
               )}
-        
+         <Delate />
     </InvoicesComp>
   )
 }

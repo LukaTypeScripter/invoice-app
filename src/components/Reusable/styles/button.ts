@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 interface ButtonProps {
-    width: number;
-    height: number;
+    width?: number;
+    height?: number;
     bgColor:string;
     color?:string;
+    padding?:string;
   }
 
 export const Btn = styled.button<ButtonProps>`
@@ -19,5 +20,5 @@ export const Btn = styled.button<ButtonProps>`
     line-height: 15px;
     width: ${(props) => props.width}px;
     height: ${(props) => props.height}px;
-
+    padding: ${(props) => props.padding};
 `

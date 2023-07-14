@@ -1,4 +1,4 @@
-import  { Fragment, useContext } from "react";
+import  { Fragment, useContext, useState } from "react";
 import {
   BackCont,
   BackIcon,
@@ -35,6 +35,8 @@ function SpecificInvoices() {
   if (specificInvoices.length === 0) {
     return <div>No specific invoices found.</div>; 
   }
+  const [edit,setEdit] = useState(false)
+  const [delate,setDelate] = useState(false)
   return (
     <Recipt>
       <ReciptCont>
@@ -55,24 +57,27 @@ function SpecificInvoices() {
               <StatusBarBtnCont>
                 <Buttons
                   text={"Edit"}
-                  width={73}
-                  height={48}
+                  width={73 }
+                  height={48 }
                   bgColor={"#f9fafe"}
                   color={"#7e88c3"}
+                  onCLick={() => setEdit(true)}
                 />
                 <Buttons
                   text={"Delate"}
-                  width={89}
+                  width={89 }
                   height={48}
                   bgColor={"#ec5757"}
                   color={"#fff"}
+                  onCLick={() => setDelate(true)}
                 />
                 <Buttons
                   text={"Mark as Read"}
-                  width={131}
-                  height={48}
+                  width={131 ||0}
+                  height={48 || 0}
                   bgColor={"#7c5dfa"}
                   color={"#fff"}
+                  onCLick={() => console.log("wee")}
                 />
               </StatusBarBtnCont>
             </Fragment>

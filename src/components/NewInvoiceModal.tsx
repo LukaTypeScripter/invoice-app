@@ -4,6 +4,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { DarkModeContext, InvoicesModalContext, ListContext } from '../contexts';
 import { Invoice, Item } from '../contexts/interfaces/List';
+import Delate from './Delate';
 
 function NewInvoiceModal() {
     const {data,handleAddInvoice} = useContext(ListContext)
@@ -142,6 +143,7 @@ function NewInvoiceModal() {
 
   console.log(data)
   return ( 
+    <>
     <PopUp>
         <PopUpForm darkMode={darkMode}>
             <PopUpBillCOnt>
@@ -358,6 +360,8 @@ function NewInvoiceModal() {
             </PopUpPaymentCont>
         </PopUpForm>
     </PopUp>
+  
+    </>
   )
 }
 
