@@ -1,8 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
   DarkModeContext,
-  InvoicesModalContext,
-  ListContext,
+    ListContext,
 } from "../contexts";
 import { Invoice, Item } from "../contexts/interfaces/List";
 import {
@@ -44,7 +43,7 @@ interface EditInvoiceModalProps {
 
 function EditInvoiceModal({ invoice, onClose,setEdit }: EditInvoiceModalProps) {
   const { data, setData } = useContext(ListContext);
-  const { setIsOpenNewInvoice } = useContext(InvoicesModalContext);
+
   const { darkMode } = useContext(DarkModeContext);
 
   const [value, onChange] = useState(new Date());
