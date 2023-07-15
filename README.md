@@ -1,2 +1,3 @@
-[invoice dekstop](https://github.com/lukapain/invoice-app/assets/114741110/8c60d3d7-cd9a-4536-9529-5bd373b60310)
-![mobile](https://github.com/lukapain/invoice-app/assets/114741110/77f4d05d-bcd0-4055-9f68-4f8b6e285b6c)
+
+![invoice dekstop](https://github.com/lukapain/invoice-app/assets/114741110/adf06b2a-fbf1-40fc-bd2f-52c325ef9cbd)
+![mobile](https://github.com/lukapain/invoice-app/assets/114741110/918c7dd9-47ef-45fc-a8af-e25c85f28169)
