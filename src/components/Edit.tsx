@@ -39,9 +39,10 @@ import styled from "styled-components";
 interface EditInvoiceModalProps {
   invoice: Invoice;
   onClose: () => void;
+  setEdit:React.Dispatch<React.SetStateAction<boolean>>
 }
 
-function EditInvoiceModal({ invoice, onClose }: EditInvoiceModalProps) {
+function EditInvoiceModal({ invoice, onClose,setEdit }: EditInvoiceModalProps) {
   const { data, setData } = useContext(ListContext);
   const { setIsOpenNewInvoice } = useContext(InvoicesModalContext);
   const { darkMode } = useContext(DarkModeContext);
@@ -411,7 +412,7 @@ function EditInvoiceModal({ invoice, onClose }: EditInvoiceModalProps) {
               <AddButton onClick={handleAddItem}>+ Add New Item</AddButton>
             </PopUpItems>
             <PopupBtnConts>
-              <BtnTypeWhite onClick={() => setIsOpenNewInvoice(false)}>
+              <BtnTypeWhite onClick={() => setEdit(false)}>
                 cancel
               </BtnTypeWhite>
               <BtnTypePurple onClick={(e) => handleSaveInvoice(e, "pending")}>

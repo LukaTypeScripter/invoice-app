@@ -149,7 +149,7 @@ function SpecificInvoices() {
               />
               )}
               {edit && (
-  <EditInvoiceModal invoice={info} onClose={() => setEdit(false) } />
+  <EditInvoiceModal invoice={info} onClose={() => setEdit(false) } setEdit={setEdit} />
               )}
             
             </Fragment>
