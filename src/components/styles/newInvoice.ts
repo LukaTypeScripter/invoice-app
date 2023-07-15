@@ -100,10 +100,10 @@ export const PopUpBillLabelError = styled.label`
 
 export const AdressInput = styled.input<{darkmode:boolean}>`
 background: ${props => props.darkmode ? "#252945" : "transparent"};
-    border: ${darkmode => darkmode ? "0" : "1px solid #dfe3fa"} ;
+    border: ${props => props.darkmode ? "0" : "1px solid #dfe3fa"} ;
     border-radius: 4px;
     box-sizing: border-box;
-    color:  ${darkmode => darkmode ? "white" : "#0c0e16"};
+    color:  ${props => props.darkmode ? "white" : "black"};
     font-family: Spartan;
     font-size: 12px;
     font-style: normal;
@@ -142,7 +142,7 @@ export const Calendars = styled.div<{darkmode:boolean}>`
     padding: 16px;
     width: 100%;
 background: ${props => props.darkmode ? "#252945" : "transparent"};
-    border: ${darkmode => darkmode ? "0" : "1px solid #dfe3fa"} ;
+border: ${props => props.darkmode ? "0" : "1px solid #dfe3fa"} ;
         
 `
 export const CurrentDate = styled.p<{darkmode:boolean}>`
@@ -260,8 +260,8 @@ box-sizing: border-box;
     color:#0c0e16;
     outline: 0;
     background: ${props => props.darkmode ? "#252945" : "transparent"};
-    border: ${darkmode => darkmode ? "0" : "1px solid #dfe3fa"} ;
-    color:  ${darkmode => darkmode ? "white" : "#0c0e16"};
+    border: ${props => props.darkmode ? "0" : "1px solid #dfe3fa"} ;
+    color:  ${props => props.darkmode ? "white" : "#0c0e16"};
 `
 
 export const DelateInp = styled.i`
