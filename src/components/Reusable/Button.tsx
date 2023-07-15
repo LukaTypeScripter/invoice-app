@@ -1,4 +1,4 @@
-import React from 'react'
+
 import {Btn} from './styles/button'
 import {ButtonProps} from './buttonInterface'
 function Buttons({text,width,height,bgColor,color,onCLick,padding}:ButtonProps) {

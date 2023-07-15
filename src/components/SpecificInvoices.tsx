@@ -25,9 +25,11 @@ import { DarkModeContext, ListContext } from "../contexts";
 import { DotGreen, PaidText, StatusCont, StatusWrap } from "./styles/invoices";
 import Buttons from "./Reusable/Button";
 import ItemsComp from "./Items";
+import Delate from "./Delate";
+import EditInvoiceModal from "./Edit";
 function SpecificInvoices() {
   const navigate = useNavigate();
-  const { data } = useContext(ListContext);
+  const { data,setDelate,handleDelete,delate,setData } = useContext(ListContext);
   const { darkMode } = useContext(DarkModeContext);
   const { id } = useParams();
   const specificInvoices = data.filter((invoice) => invoice.id === id);
@@ -36,8 +38,9 @@ function SpecificInvoices() {
     return <div>No specific invoices found.</div>; 
   }
   const [edit,setEdit] = useState(false)
-  const [delate,setDelate] = useState(false)
+  
   return (
+    <>
     <Recipt>
       <ReciptCont>
         <BackCont onClick={() => navigate("/")}>
@@ -54,7 +57,7 @@ function SpecificInvoices() {
                   <PaidText status={invoice.status}>{invoice.status}</PaidText>
                 </StatusWrap>
               </StatusCont>
-              <StatusBarBtnCont>
+              <StatusBarBtnCont darkMode={darkMode}>
                 <Buttons
                   text={"Edit"}
                   width={73 }
@@ -73,11 +76,21 @@ function SpecificInvoices() {
                 />
                 <Buttons
                   text={"Mark as Read"}
-                  width={131 ||0}
-                  height={48 || 0}
+                  width={131}
+                  height={48}
                   bgColor={"#7c5dfa"}
                   color={"#fff"}
-                  onCLick={() => console.log("wee")}
+                  onCLick={() => {
+                    const updatedData = data.map((invoice) => {
+                      if (invoice.id === id) {
+                        return { ...invoice, status: "paid" };
+                      }
+                      return invoice;
+                    });
+                    setData(updatedData);
+                  }}
+                  
+                  status={invoice.status}
                 />
               </StatusBarBtnCont>
             </Fragment>
@@ -129,11 +142,23 @@ function SpecificInvoices() {
               </InfoBottom>
 
               <ItemsComp info={info} />
+              {delate && (
+                <Delate onDelate={() => handleDelete(info.id)}
+              onCancel={() => setDelate(false)}
+              id={info.id}
+              />
+              )}
+              {edit && (
+  <EditInvoiceModal invoice={info} onClose={() => setEdit(false) } />
+              )}
+            
             </Fragment>
           ))}
         </InfoCont>
       </ReciptCont>
     </Recipt>
+    
+    </>
   );
 }
 

@@ -1,12 +1,11 @@
 import styled from "styled-components";
-import { arrowDown, arrowLeft, arrowRigth, calendar, delate } from "../../images";
+import { arrowDown,calendar, delate } from "../../images";
 
 export const PopUp = styled.div`
 opacity: 1;
 visibility: visible;
-height: 100%;
+height: 100%; 
 left: 103px;
-
 position: fixed;
 top: 0;
 transition: all .2s ease-out;
@@ -22,6 +21,12 @@ width: 100%;
     right: 0;
     top: 0;
     z-index: -1;
+}
+@media screen and (max-width: 1024px) {
+    left: 0;
+    overflow: hidden;
+    z-index: 22222;
+    position: absolute;
 }
 `
 
@@ -39,6 +44,9 @@ overflow-y: scroll;
 padding: 56px;
 width: 100%;
 box-sizing: border-box;
+@media screen and (max-width: 1024px)  {
+    padding:24px;
+}
 `
 
 export const PopUpBillCOnt = styled.div`

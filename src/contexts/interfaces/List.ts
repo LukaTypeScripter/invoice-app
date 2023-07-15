@@ -7,6 +7,9 @@ export interface ListContextValue {
     setIsOpenFillter: React.Dispatch<React.SetStateAction<boolean>>
     isOpenFillter:boolean
     handleAddInvoice: (newInvoice: Invoice) => void
+    handleDelete(invoiceId: string): void
+    delate:boolean
+    setDelate: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 
@@ -18,7 +21,10 @@ export const ListContextValue: ListContextValue = {
     select:'',
     setIsOpenFillter:() => {},
     isOpenFillter:false,
-    handleAddInvoice:() => {}
+    handleAddInvoice:() => {},
+    handleDelete:() => {},
+    delate:false,
+    setDelate:() => {},
 };
 
 

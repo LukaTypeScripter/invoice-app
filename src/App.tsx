@@ -1,16 +1,20 @@
-import { useState,useContext } from 'react'
+import { useContext } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import styled from 'styled-components'
 import './App.css'
 import { SideNav,Invoices, SpecificInvoices } from './components'
 import { DarkModeContext } from './contexts'
+import { ListContextProvider } from './contexts/List';
 
 function App() {
  const {darkMode} = useContext(DarkModeContext)
 
   return (
+    
     <Router>
+      <ListContextProvider>
+    
     <AppCont darkMode={darkMode}>
       <SideNav />
       <Routes>
@@ -18,7 +22,9 @@ function App() {
         <Route path="/invoices/:id" element={<SpecificInvoices/>} />
       </Routes>
     </AppCont>
+    </ListContextProvider>
   </Router>
+
     
   )
 }

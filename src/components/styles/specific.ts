@@ -14,6 +14,10 @@ export const ReciptCont = styled(Recipt)`
   flex-direction: column;
   gap: 32px;
   max-width: 730px;
+  @media screen and (max-width: 768px) {
+    max-width: 400px;
+    gap:16px;
+  }
 `;
 
 export const BackCont = styled.div`
@@ -46,6 +50,7 @@ export const StatusBar = styled.div<{darkMode:boolean}>`
   justify-content: space-between;
   padding: 24px 32px;
   width: 100%;
+ 
 `;
 
 export const StatusBarLabel = styled.p`
@@ -57,11 +62,22 @@ export const StatusBarLabel = styled.p`
   line-height: 15px;
   margin: 0;
 `;
-export const StatusBarBtnCont = styled.div`
+export const StatusBarBtnCont = styled.div<{darkMode:boolean}>`
   align-items: center;
   display: flex;
   gap: 8px;
   justify-content: center;
+  @media screen and (max-width: 768px) {
+    background: ${props => props.darkMode ? "#1E2139":"white"};
+    bottom: 0;
+    box-shadow: 0 10px 10px -10px rgba(72,84,159,.1);
+    box-sizing: border-box;
+    left: 0;
+    padding: 24px;
+    position: absolute;
+    right: 0;
+    width: 100%;
+  }
 `;
 export const DefaultInfo = styled.div`
   align-items: flex-start;
@@ -77,10 +93,19 @@ export const InfoCont = styled(DefaultInfo)<{darkMode:boolean}>`
   gap: 42px;
   justify-content: center;
   padding: 32px;
+  @media screen and (max-width: 768px) {
+    margin-bottom: 78px;
+    padding: 24px;
+  }
 `;
 
 export const InfoTop = styled(DefaultInfo)`
   justify-content: space-between;
+  @media screen and (max-width: 768px) {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 30px;
+  }
 `;
 export const InfoBottom = styled.div`
   align-items: flex-start;
@@ -88,6 +113,10 @@ export const InfoBottom = styled.div`
   gap: 98px;
   justify-content: flex-start;
   width: 100%;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+    gap: 36px;
+  }
 `;
 export const InfoLeftCont = styled.div`
   align-items: flex-start;
@@ -144,6 +173,10 @@ export const Items = styled.div<{darkMode:boolean}>`
     margin-bottom: 64px;
     padding: 32px;
     position: relative;
+    @media screen and (max-width: 768px) {
+      margin-bottom: 78px;
+    padding: 24px;
+    }
 `;
 export const ItemsTable = styled.ul`
   justify-content: space-between;

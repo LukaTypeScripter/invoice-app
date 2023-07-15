@@ -6,10 +6,11 @@ interface ButtonProps {
     bgColor:string;
     color?:string;
     padding?:string;
+    status?:string;
   }
 
 export const Btn = styled.button<ButtonProps>`
-    background: ${props => props.bgColor};
+    background: ${props => props.status === "paid" ? "transperent" : props.bgColor};
     border: 0;
     border-radius: 24px;
     color: ${props => props.color};

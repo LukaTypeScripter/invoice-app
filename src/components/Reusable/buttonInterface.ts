@@ -6,4 +6,5 @@ export interface ButtonProps {
     color?:string
     onCLick?: () => void
     padding?: string
+    status?: string
 }
