@@ -20,7 +20,6 @@ export const ListContextProvider = ({
   const [delate,setDelate] = useState(false)
 
   function handleDelete(invoiceId:string) {
-    // Assuming you have an array of invoices in your data state
     setData((prevData) => {
       const updatedData = prevData.filter((invoice) => invoice.id !== invoiceId);
       return updatedData;
